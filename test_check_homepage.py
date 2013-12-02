@@ -2,6 +2,7 @@
 # nosetests -v
 # http://selenium-python.readthedocs.org/en/latest/getting-started.html
 # http://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference
+# http://selenium.googlecode.com/git/docs/api/py/index.html
 
 import unittest
 from selenium import webdriver
@@ -24,14 +25,14 @@ class CheckHomePage(unittest.TestCase):
     def test_homepage_elements(self):
     	driver = self.driver
     	driver.get(voxy)
-    	driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a__")
+    	# driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a__")
     	#driver.implicitly_wait(8)
-    	# try:	
-    	# 	#driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a")
-    	# 	#driver.find_element(By.LINK_TEXT, "Start your free 7-day trial today!")
-    	# except NoSuchElementException:
-    	# 	return False
-    	# return True
+    	try:	
+    		if driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a"):
+             return True
+    		#driver.find_element(By.LINK_TEXT, "Start your free 7-day trial today!")
+    	except:
+    		return False
 
     def tearDown(self):
         self.driver.close()
