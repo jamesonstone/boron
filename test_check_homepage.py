@@ -1,7 +1,7 @@
 # Let's do this!
 # nosetests -v
 # http://selenium-python.readthedocs.org/en/latest/getting-started.html
-# http://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference
+# 3
 # http://selenium.googlecode.com/git/docs/api/py/index.html
 
 import unittest
@@ -10,37 +10,42 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
-voxy = "http://www.voxy.com/"
+voxy = "http://master.pub.voxy.com/"
 
 class CheckHomePage(unittest.TestCase):
 
+    #setup 
     def setUp(self):
         self.driver = webdriver.Firefox()
 
-    def test_homepage_title(self):
-        driver = self.driver
-        driver.get(voxy)
-        self.assertIn("VOXY", driver.title)
-
-    def test_homepage_elements(self):
-    	driver = self.driver
-    	driver.get(voxy)
-    	# driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a__")
-    	#driver.implicitly_wait(8)
-    	try:	
-    		if driver.find_elements_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a"):
-             return True
-    		#driver.find_element(By.LINK_TEXT, "Start your free 7-day trial today!")
-    	except:
-    		return False
-
+    #teardown
     def tearDown(self):
         self.driver.close()
 
+    #check home page title
+    def test_homepage_title(self):
+        d = self.driver
+        d.get(voxy)
+        self.assertIn("VOXY", d.title)
+
+    #check 
+    def test_homepage_elements(self):
+    	d = self.driver
+        d.get(voxy)
+        elem = d.find_element_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a")
+        self.check_element_exists(path)
 
 
 
 
+
+    #method for checking element exists
+    def check_element_exists(x):
+        try:
+            webdriver.find_element_by_xpath(x)
+        except NoSuchElementException:
+            return False
+        return True
 
 
 
@@ -50,3 +55,5 @@ class CheckHomePage(unittest.TestCase):
 # __main__
 if __name__ == "__main__":
     unittest.main()
+
+
