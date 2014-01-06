@@ -7,7 +7,6 @@ import unittest
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-# from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 voxy = "http://master.pub.voxy.com/"
@@ -32,7 +31,8 @@ class CheckHomePage(unittest.TestCase):
     def test_homepage_elements(self):
     	d = self.driver
         d.get(voxy)
-        d.find_element_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a")
+        a = d.find_element_by_xpath("//*[@id=\"fixed-login\"]/div/div/div/a")
+        self.assertTrue("BAH Get 35\%\ off when you personalize your course today!", a.text)
         print "found register button"
         d.find_element_by_xpath("//*[@id=\"header_login_Btn\"]")
 
